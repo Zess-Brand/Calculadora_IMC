@@ -1,0 +1,61 @@
+# Función para validar que el dato ingresado sea un número positivo
+def validar_numero(mensaje):
+    while True:
+        try:
+            valor = float(input(mensaje))
+            if valor > 0:
+                return valor
+            else:
+                print("El valor debe ser un número positivo.")
+        except ValueError:
+            print("Por favor, ingresa un número válido.")
+
+# Pedimos al usuario la cantidad de personas para las que se calculará el IMC
+cantidad_personas = int(input("¿Cuántas personas deseas registrar? "))
+
+# Validamos que la cantidad de personas sea mayor a 0
+while cantidad_personas > 0:
+    # Solicitar los datos personales del usuario
+    nombre = input("Por favor, ingresa tu nombre: ")
+    apellido_paterno = input("Ingresa tu apellido paterno: ")
+    apellido_materno = input("Ingresa tu apellido materno: ")
+
+    # Validar que la edad, peso y estatura sean números positivos
+    edad = validar_numero("Ingresa tu edad: ")
+    peso = validar_numero("Ingresa tu peso en kilogramos: ")
+    estatura = validar_numero("Ingresa tu estatura en metros (ej. 1.75): ")
+
+    # Calcular el Índice de Masa Corporal (IMC)
+    imc = peso / (estatura ** 2)
+
+    # Desplegar la información y el resultado
+    print("\n--- Información del Usuario ---")
+    print(f"Nombre completo: {nombre} {apellido_paterno} {apellido_materno}")
+    print(f"Edad: {edad} años")
+    print(f"Peso: {peso} kg")
+    print(f"Estatura: {estatura} m")
+    print(f"Tu Índice de Masa Corporal (IMC) es: {imc:.2f}")
+
+    # Clasificación del IMC según los rangos establecidos con términos alternativos
+    if imc <= 15.99:
+        print("Clasificación: Desnutrición grave")
+    elif 16.00 <= imc <= 16.99:
+        print("Clasificación: Desnutrición moderada")
+    elif 17.00 <= imc <= 18.49:
+        print("Clasificación: Desnutrición leve")
+    elif 18.50 <= imc <= 24.99:
+        print("Clasificación: Peso saludable")
+    elif 25.00 <= imc <= 29.99:
+        print("Clasificación: Exceso de peso")
+    elif 30.00 <= imc <= 34.99:
+        print("Clasificación: Obesidad leve")
+    elif 35.00 <= imc <= 39.99:
+        print("Clasificación: Obesidad moderada")
+    else:
+        print("Clasificación: Obesidad severa")
+
+    # Restamos uno a la cantidad de personas para avanzar en el ciclo
+    cantidad_personas -= 1
+    print("\n")  # Agrega una línea en blanco para separar las salidas de cada persona
+
+print("Registro completado.")
